@@ -1,0 +1,15 @@
+<h1>
+  <%= profile_image_for @user %>
+  <%= @user.name %>
+</h1>
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>
+
+<h2>Tweets </h2>
+<% @user.tweets.each do |tweet| %>
+  <div>
+    <%= tweet.content %>
+  </div>
+  <hr>
+<% end %>
