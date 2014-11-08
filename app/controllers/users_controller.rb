@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   # onlyの中で指定されたactionが実行される直前に実行されるアクション
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :signed_in_user, only: [:edit, :update]
+  before_action :correct_user,   only: [:edit, :update]
 
   # GET /users
   # GET /users.json
@@ -10,7 +12,9 @@ class UsersController < ApplicationController
 
   # GET /users/1
   # GET /users/1.json
+  # user/showのツイートのリファクタリング、ページネーション
   def show
+    @tweets = @user.tweets.paginate(page: params[:page])
   end
 
   # GET /users/new
@@ -33,6 +37,7 @@ class UsersController < ApplicationController
 
     # @user.saveのところでvalidatesメソッドが実行されている
     if @user.save
+      sign_in @user
       flash[:success] = "Welcome to Twitter!"
       redirect_to @user
     else
@@ -72,5 +77,17 @@ class UsersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    end
+
+    def signed_in_user
+      # signin_urlに飛ばす
+      # signin_path -> /signin
+      # signin_url →　localhost:3000/signin
+      redirect_to signin_url, notice: "Please sign in." unless signed_in?
+    end
+
+    def correct_user
+      @user = User.find(params[:id])
+      redirect_to(root_path) unless current_user?(@user)
     end
 end

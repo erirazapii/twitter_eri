@@ -1,6 +1,9 @@
 Rails.application.routes.draw do #RailsでもTwitterでもここ名前関係ないらしい…謎だけど
+  match '/signin', to:'sessions#new', via:'get'
+  match '/signout', to:'sessions#destroy', via:'delete'
   root  'about#index'
   match '/about', to:'about#index', via:'get'
+  resources :sessions, only: [:new, :create, :destroy]
   resources :users
   resources :tweets
 

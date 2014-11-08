@@ -1,0 +1,10 @@
+<li>
+  <%= link_to profile_image_for(tweet.user) %>
+  <span class="user">
+    <%= link_to tweet.user.name, tweet.user %>
+  </span>
+  <span class="content"><%= tweet.content %></span>
+  <span class="timestamp">
+    Posted <%= time_ago_in_words(tweet.created_at) %> ago.
+  </span>
+</li>

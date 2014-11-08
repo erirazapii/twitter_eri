@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141104043129) do
+ActiveRecord::Schema.define(version: 20141108055258) do
+
+  create_table "relationships", force: true do |t|
+    t.integer  "follower_id"
+    t.integer  "following_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "relationships", ["follower_id", "following_id"], name: "index_relationships_on_follower_id_and_following_id", unique: true
+  add_index "relationships", ["follower_id"], name: "index_relationships_on_follower_id"
+  add_index "relationships", ["following_id"], name: "index_relationships_on_following_id"
 
   create_table "tweets", force: true do |t|
     t.string   "content"
@@ -27,8 +38,10 @@ ActiveRecord::Schema.define(version: 20141104043129) do
     t.datetime "updated_at"
     t.string   "password_digest"
     t.string   "image"
+    t.string   "remember_token"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["remember_token"], name: "index_users_on_remember_token"
 
 end
