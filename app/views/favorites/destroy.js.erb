@@ -1,0 +1,2 @@
+$("#<%= @tweet.id %>").html("<%= escape_javascript(render('users/favorite_form', tweet: @tweet)) %>")
+$("#favorites").html('<%= @user.favorites.count %>')

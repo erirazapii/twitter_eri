@@ -4,14 +4,33 @@
 	    <h1>
 		  <%= profile_image_for @user %>
 		  <%= @user.name %>
-		</h1>
+		  </h1>
+    </section>
+      <span id="user_<%= @user.id %>" class="follow-wrapper">
+        <%= render 'follow_form', user: @user if signed_in? %>
+      </span>
+    <section>
+      <%= render 'shared/stats' %>
     </section>
   </aside>
   <div class="span8">
     <% if @user.tweets.any? %>
       <h3>Tweets (<%= @user.tweets.count %>)</h3>
       <ol class="microposts">
+      	<!-- パーシャルの呼び出し -->
+      	<!-- 最終的な書き方③ -->
         <%= render @tweets %>
+
+        <!-- ちょっと省略した書き方② 
+        <% @tweets.each do |tweet| %>
+        <%= render tweet %>
+        <% end %> -->
+
+        <!-- 一番原始的な書き方① 
+        <% @tweets.each do |tweet| %>
+        <%= render 'tweets/tweet', tweet: tweet %>
+        <% end %> -->
+
       </ol>
       <%= will_paginate @tweets %>
     <% end %>

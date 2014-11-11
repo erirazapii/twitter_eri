@@ -1,0 +1,7 @@
+
+  <% if current_user.favorite?(tweet) %>
+    <%= render 'users/unfavorite', tweet: tweet %>
+  <% else %>
+    <%= render 'users/favorite', tweet: tweet %>
+  <% end %>
+  

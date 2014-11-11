@@ -68,9 +68,48 @@ class UsersController < ApplicationController
     redirect_to users_url
   end
 
+
+
+
+
+  # 一覧を表示
+
+   def following
+    @title = "Following"
+    # user_idを取り出す
+    @user = User.find(params[:id])
+    # @usersにfollowingsメソッドを使って、フォローしている人を代入
+    @users = @user.followings.paginate(page: params[:page])
+    # show_followのViewを呼び出す　出力するViewを選択
+    render 'show_follow'
+  end
+
+  def followers
+    @title = "Followers"
+    @user = User.find(params[:id])
+    @users = @user.followers.paginate(page: params[:page])
+    # show_followのViewを呼び出す
+    render 'show_follow'
+  end
+
+  def favorites
+    @title = "Favorites"
+    @user = current_user
+    # @tweet = Tweet.new(user_id: current_user.id)
+    # 上は↓と同じ意味
+    @tweet = current_user.tweets.build
+    @feed_tweets = current_user.favorite_tweets.paginate(page: params[:page])
+    #　普通は↓を書かないとUser Viewのfavorite.htmlに飛ばされるが、下を書くことによって、飛ばすView/パーシャルを指定できる
+    render 'about/index'
+  end
+
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
+      # params[id]に/users/数字　で渡ってきた数字の部分を持っている
+      # user_idとして数字をもつユーザーのオブジェクトをデータベースかた取ってきて@userに代入
       @user = User.find(params[:id])
     end
 
@@ -79,12 +118,6 @@ class UsersController < ApplicationController
       params.require(:user).permit(:name, :email, :password, :password_confirmation)
     end
 
-    def signed_in_user
-      # signin_urlに飛ばす
-      # signin_path -> /signin
-      # signin_url →　localhost:3000/signin
-      redirect_to signin_url, notice: "Please sign in." unless signed_in?
-    end
 
     def correct_user
       @user = User.find(params[:id])

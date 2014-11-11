@@ -4,7 +4,13 @@
     <%= link_to tweet.user.name, tweet.user %>
   </span>
   <span class="content"><%= tweet.content %></span>
+  <span class="favorite" id="<%= tweet.id %>"><%= render 'users/favorite_form', tweet: tweet %></span>  
   <span class="timestamp">
     Posted <%= time_ago_in_words(tweet.created_at) %> ago.
   </span>
+  <% if current_user?(tweet.user) %>
+    <%= link_to "delete", tweet, method: :delete,
+                                     data: { confirm: "You sure?" },
+                                     title: tweet.content %>
+  <% end %>
 </li>

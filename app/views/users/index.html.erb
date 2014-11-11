@@ -1,14 +1,9 @@
 <h1>All users</h1>
 
-<%= will_paginate %>
-
+<%= will_paginate @users %>
 <ul class="users">
-  <% @users.each do |user| %>
-    <li>
-      <%= profile_image_for user %>
-      <%= link_to user.name, user %>
-    </li>
-  <% end %>
-</ul>
+<!-- 複数のものは@usersの配列に入れられてforeach文がぐるぐる回される -->
+  <%= render @users %>
 
-<%= will_paginate %>
+</ul>
+<%= will_paginate @users %>

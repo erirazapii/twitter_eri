@@ -6,6 +6,9 @@
         <%= render 'shared/user_info' %>
       </section>
       <section>
+        <%= render 'shared/stats' %>
+      </section>
+      <section>
         <%= render 'tweets/form' %>
       </section>
     </aside>
@@ -13,12 +16,23 @@
       <% if @feed_tweets.any? %>
         <h3>Tweets</h3>
         <ol class="microposts">
+          <!-- renderで配列が入ったときはforeach文
+          @feed_tweetsはmodelのtweetオブジェクト -->
+
+          <!-- １、まず配列を展開
+          ２、あ！オブジェクト発見！
+          ３、オブジェクトどこのや〜　⇨Tweetや！
+          ４、あ、じゃあ_tweetに行けばいいんや！（どこのファイルでも（_同じ名前）にいく
+          ５、ついでに発見したオブジェクトをパーシャルに渡す -->
           <%= render @feed_tweets %>
+
         </ol>
         <%= will_paginate @feed_tweets %>
       <% end %>
     </div>
   </div>
+
+
 
 <% else %>
 

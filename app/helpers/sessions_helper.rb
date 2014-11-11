@@ -45,4 +45,14 @@ module SessionsHelper
 
 
 
+
+  def signed_in_user
+      # signin_urlに飛ばす
+      # signin_path -> /signin
+      # signin_url →　localhost:3000/signin
+      redirect_to signin_url, notice: "Please sign in." unless signed_in?
+  end
+
+
+
 end
