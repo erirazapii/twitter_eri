@@ -12,7 +12,12 @@ Rails.application.routes.draw do #RailsでもTwitterでもここ名前関係な�
   end
   resources :sessions, only: [:new, :create, :destroy]
   resources :relationships, only: [:create, :destroy]
-  resources :tweets
+# ルーティング /tweets/id/favorites にしたい
+  resources :tweets do
+    member do
+      get :favorites
+    end
+  end
   resources :favorites, only: [:create, :destroy]
 
 

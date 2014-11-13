@@ -8,8 +8,9 @@ class SearchController < ApplicationController
  #  @user
  # @tweetの中にデータベースからとってきたものを格納する
  # name とか
- 	@keyword = params[:key]
- 	@tweets = Tweet.find_by(params[:content])
- 	@users = User.find_by(params[:name])
+ 	@keyword = params[:keyword]
+ 	# where("カラム名 LIKE ?", 具体的に調べる中身）
+ 	@tweets = Tweet.where("content LIKE ?", "%#{@keyword}%")
+ 	@users = User.where("name LIKE ?", "%#{@keyword}%")
   end
 end

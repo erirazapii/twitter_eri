@@ -20,35 +20,13 @@
       	<!-- パーシャルの呼び出し -->
       	<!-- 最終的な書き方③ -->
         <%= render @tweets %>
-
-        <!-- ちょっと省略した書き方② 
-        <% @tweets.each do |tweet| %>
-        <%= render tweet %>
-        <% end %> -->
-
-        <!-- 一番原始的な書き方① 
-        <% @tweets.each do |tweet| %>
-        <%= render 'tweets/tweet', tweet: tweet %>
-        <% end %> -->
-
       </ol>
       <%= will_paginate @tweets %>
     <% end %>
   </div>
 </div>
 		
-
-
 		<%= link_to 'Edit', edit_user_path(@user) %> |
 		<%= link_to 'Back', users_path %>
-
-
-		<!-- <h2>Tweets </h2>
-		<% @user.tweets.each do |tweet| %>
-		  <div>
-		    <%= tweet.content %>
-		  </div>
-		  <hr>
-			<% end %> -->
 
 

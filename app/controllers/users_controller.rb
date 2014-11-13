@@ -99,6 +99,7 @@ class UsersController < ApplicationController
     # 上は↓と同じ意味
     @tweet = current_user.tweets.build
     @feed_tweets = current_user.favorite_tweets.paginate(page: params[:page])
+    # users?page=1
     #　普通は↓を書かないとUser Viewのfavorite.htmlに飛ばされるが、下を書くことによって、飛ばすView/パーシャルを指定できる
     render 'about/index'
   end

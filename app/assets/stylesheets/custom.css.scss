@@ -87,6 +87,10 @@ p {
 
 /* header */
 
+.navbar-inner{
+  height: 56px;
+}
+
 #logo {
   float: left;
   margin-right: 10px;
@@ -105,7 +109,13 @@ p {
 
 header form{
   display: inline-block;
+  float: left;
   margin: 0;
+}
+
+header input#keyword {
+  display: inline-block;
+  width: 200px;
 }
 
 /* footer */

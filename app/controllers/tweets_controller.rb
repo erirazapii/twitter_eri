@@ -57,6 +57,18 @@ class TweetsController < ApplicationController
     redirect_to root_url
   end
 
+
+  def favorites
+
+    # @tweet = Tweet.find(params[:favorite][:tweet_id])
+    # @user = current_user
+
+    @tweet = Tweet.find(params[:id])
+    @user = current_user
+    @feed_users = @tweet.favoriting_users.paginate(page: params[:page])
+    render 'users/show_favorites'
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_tweet

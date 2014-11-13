@@ -4,9 +4,10 @@ class FavoritesController < ApplicationController
   	# パラメータをページからページに渡す方法は２つある。POSTはURLに現れない。GETはURLに現れる
   	# １、フォーム(POST)　２、リンク(GET)($_GET['page'])
 
-  	# <from action="url">
+  	# <form action="url">
   	#   <input name="email">
   	# PHP => $_POST['email'],   rails => params['email']
+  	# ブラウザで要素の検証して、inputタグのnameのところを確認して、paramsに渡す
 
   	# <input name="user[name]">
   	# <input name="user[email]">

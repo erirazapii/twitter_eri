@@ -1,6 +1,6 @@
 <!-- buildは基本newと一緒 -->
-<!-- form タグは　GET ,  link_to は POST　どっちでもかける -->
-<%= form_for(current_user.favorites.build(tweet_id: tweet.id), remote: true) do |f| %>
+<!-- form タグは　GET ,  link_to は POST　どっちでもかける -->  
+<%= form_for(current_user.favorites.build(tweet_id: tweet.id), remote: true, class: 'favorite-link') do |f| %>
   <div><%= f.hidden_field :tweet_id %></div>
   <button type="submit"><i class="fa fa-star unfavorite-star"></i></button> 
 <% end %>
