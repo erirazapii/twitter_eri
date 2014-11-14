@@ -1,0 +1,3 @@
+<%= form_for(current_user.replies.find_by(tweet_id: tweet.id), html: { method: :delete }) do |f| %>
+  <button type="submit"><i class="fa-reply"></i></button> 
+<% end %>

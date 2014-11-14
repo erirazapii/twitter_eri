@@ -1,0 +1,1 @@
+$("#<%= @tweet.id %>").html("<%= escape_javascript(render('replies/reply_form', tweet: @tweet)) %>")

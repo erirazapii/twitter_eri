@@ -1,0 +1,6 @@
+
+  <% if current_user.reply?(reply) %>
+    <%= render 'replies/offreply', reply: reply %>
+  <% else %>
+    <%= render 'replies/onreply', reply: reply %>
+  <% end %>

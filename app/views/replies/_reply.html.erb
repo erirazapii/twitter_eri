@@ -1,0 +1,21 @@
+<li>
+  <%= link_to profile_image_for(reply.user) %>
+  <span class="user">
+    <%= link_to reply.user.name, reply.user %>
+  </span>
+  <span class="content"><%= reply.content %></span>
+  <span class="reply" id="<%= reply.id %>"><%= render 'replies/reply_form', reply: reply %></span>
+  <span class="favorite" id="<%= reply.id %>"><%= render 'users/favorite_form', reply: reply %></span>
+  <span class="favorite_number" id="<%= reply.id %>"><%= link_to reply.favorites.count, favorites_reply_path(reply) %></span> 
+<!--   link_to 表示するもの, リンク先　-->  
+  <span class="timestamp">
+    Posted <%= time_ago_in_words(reply.created_at) %> ago.
+  </span>
+  <% if current_user?(reply.user) %>
+    <%= link_to "delete", reply, method: :delete,
+                                     data: { confirm: "You sure?" },
+                                     title: reply.content %>
+  <% end %>
+</li>
+<!-- @つけたらコントローラーで定義されてる@replyになって
+@つけなかったらrenderで渡されてるreplyになる -->

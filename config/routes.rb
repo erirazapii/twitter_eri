@@ -19,6 +19,7 @@ Rails.application.routes.draw do #RailsでもTwitterでもここ名前関係な�
     end
   end
   resources :favorites, only: [:create, :destroy]
+  resources :replies
 
 
   # The priority is based upon order of creation: first created -> highest priority.

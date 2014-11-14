@@ -7,6 +7,8 @@ class AboutController < ApplicationController
     # 現在ログインしているユーザーのツイートを持ってきてる（paginateしてる）
     # @feed_tweets = current_user.tweets.paginate(page: params[:page])
     @feed_tweets = current_user.feed.paginate(page: params[:page])
+    @feed_replies = current_user.replies.paginate(page: params[:page])
+    @reply = current_user.replies.build
     end
   end
 end

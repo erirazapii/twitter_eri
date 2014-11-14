@@ -32,11 +32,19 @@ class User < ActiveRecord::Base
   has_many :favorite_tweets, through: :favorites
 
 
+  # 返信機能
+  has_many :replies, class_name: "Reply"
+  # リプライした先のツイートも表示することを見越すと、これもいる・・・かなあ？
+  # has_many :reply_tweets, through: :replies, source: :tweet
+
+
 
 
   validates :name, presence: true, length: { maximum: 50 }
   has_secure_password
   validates :password, length: { minimum: 6 }
+
+
 
   def set_image(file)
     if !file.nil?
@@ -94,6 +102,27 @@ class User < ActiveRecord::Base
   def unfavorite!(tweet)
     return self.favorites.find_by(tweet_id: tweet.id).destroy
   end
+
+
+
+
+ # 返信してる？
+  def reply?(tweet)
+    return self.replies.find_by(tweet_id: tweet.id)
+    # 上と同じ意味↓
+    # Favorite.find_by(user_id: self.id, tweet_id: tweet.id)
+  end
+
+  # 返信する！
+  def reply!(tweet)
+    return self.replies.create!(tweet_id: tweet.id)
+  end
+
+  # 返信やめる！
+  def unreply!(tweet)
+    return self.replies.find_by(tweet_id: tweet.id).destroy
+  end
+
 
 
 

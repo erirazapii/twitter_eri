@@ -1,0 +1,7 @@
+<!-- buildは基本newと一緒 -->
+<!-- form タグは　GET ,  link_to は POST　どっちでもかける -->  
+<%= form_for(current_user.replies.build(tweet_id: tweet.id), class: 'reply-link') do |f| %>
+  <div><%= f.hidden_field :tweet_id %></div>
+  <%= render 'replies/form' %>
+  <button type="submit"><i class="fa-reply"></i></button> 
+<% end %>

@@ -4,6 +4,7 @@
     <%= link_to tweet.user.name, tweet.user %>
   </span>
   <span class="content"><%= tweet.content %></span>
+  <span class="reply" id="<%= tweet.id %>"><%= render 'replies/reply_form', reply: tweet.replies.build %></span>
   <span class="favorite" id="<%= tweet.id %>"><%= render 'users/favorite_form', tweet: tweet %></span>
   <span class="favorite_number" id="<%= tweet.id %>"><%= link_to tweet.favorites.count, favorites_tweet_path(tweet) %></span> 
 <!--   link_to 表示するもの, リンく先　-->  
@@ -18,3 +19,5 @@
 </li>
 <!-- @つけたらコントローラーで定義されてる@tweetになって
 @つけなかったらrenderで渡されてるtweetになる -->
+
+

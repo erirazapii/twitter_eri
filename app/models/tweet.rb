@@ -8,6 +8,11 @@ class Tweet < ActiveRecord::Base
   has_many :favorites, class_name: "Favorite"
   has_many :favoriting_users, through: :favorites
 
+  # 各ツイートがリプライをたくさん持つ
+  has_many :replies, class_name: "Reply"
+  #throughをつかうときにsourceをつかう
+  # has_many :replying_users, through: :replies, source: :user
+
 
   # データベースから実際に自分と自分のフォローしているユーザーのTweetを取得
 	def self.from_users_followed_by(user)
